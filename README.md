@@ -46,7 +46,7 @@ The workflow includes:
 
 ## 📂 Project Structure
 
-```1text
+``1text
 ai_fraud_detection/
 │
 ├── models/
@@ -56,7 +56,7 @@ ai_fraud_detection/
 │   ├── api.py
 │   └── dashboard.py
 ├── requirements.txt
-└── README.md`
+└── README.md``
 
 📊 Dataset & Model Training
 The project relies on a custom-engineered training pipeline that models user behavior history, emphasizing past returns and order frequency to predict future return risks.
