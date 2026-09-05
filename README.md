@@ -46,7 +46,7 @@ The workflow includes:
 
 ## 📂 Project Structure
 
-`1text
+```1text
 ai_fraud_detection/
 │
 ├── models/
