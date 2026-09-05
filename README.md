@@ -1,88 +1,27 @@
-# 🛡️ Merchant Risk Sentinel: AI-Driven Return Risk & Fraud Prevention Layer
-
-> **Razorpay Hackathon Submission** — Intercepting silent profit bleed by predicting high-risk and fraudulent returns *before* order fulfillment.
-
----
-
-## 🚀 Overview
-Every year, e-commerce merchants lose billions of dollars to profit margin bleed caused by **serial returners**, wardrobing, and reverse-logistics overhead. Traditional payment gateways tell merchants if a payment went through, but they fail to answer the critical next question: *"Is this customer going to return the item?"*
-
-**Merchant Risk Sentinel** solves this by inserting an intelligent AI layer right between payment capture (via Razorpay webhooks) and warehouse dispatch. It scores incoming orders in milliseconds based on **User Order History**, allowing merchants to automatically hold suspicious shipments and protect their bottom lines.
-
----
-
-## 📊 Project Objectives & What It Solves
-
-* **Pre-Fulfillment Risk Scoring:** Evaluates e-commerce transactions in real-time right after payment completion to predict the probability of a return or chargeback before the product is packed or shipped.
-* **Stops Reverse-Logistics Bleed:** Prevents online stores from losing money on shipping costs, packaging, and non-refundable gateway fees when serial returners abuse return policies.
-* **Bridges Post-Payment Vulnerabilities:** Operates immediately after payment capture to freeze high-risk orders (*On Hold*) before physical fulfillment expenses are incurred.
-* **Eliminates Manual Review Fatigue:** Automatically flags high-frequency offenders based on user order history while clearing normal, trustworthy customers instantly.
-
----
-
-## 🛠️ System Architecture & Tech Stack
-
-```text
-[Razorpay / Webhook] ➔ [FastAPI Backend] ➔ [Random Forest ML Model] 
-                                                    │
-                   ┌────────────────────────────────┴────────────────────────────────┐
-                   ▼                                                                 ▼
-[Streamlit Merchant Dashboard (Live Feed & ROI)]                 [Background Tasks ➔ Make.com / WhatsApp Alerts]
-
-
-
-
-Machine Learning: Python, Scikit-Learn (Random Forest Classifier with balanced class weights for severe data imbalance).
-
-Backend API: FastAPI, Pydantic, Uvicorn, Joblib (with asynchronous BackgroundTasks).
-
-Frontend Dashboard: Streamlit, Pandas, Requests (Live transaction management table, risk badges, and ROI financial impact metrics).
-
-Automation: Make.com webhooks for instant WhatsApp/Email alerts.
-
-⚠️ Build Challenges & Technical Obstacles Overcome
-Linux Server Build Failures: Cloud deployments initially crashed due to incompatible local audio libraries (PyAudio) and Windows-specific packages (pywin32).
-
-Solution: Cleaned up requirements.txt by removing local audio dependencies and integrated platform-specific environment markers (sys_platform == 'win32').
-
-Severe Data Class Imbalance: Fraudulent returns naturally account for only ~2% of baseline data, causing standard models to overlook threats.
-
-Solution: Engineered custom synthetic training datasets reflecting user behavior history and applied balanced class weights to the Random Forest model.
-
-Frontend-Backend Disconnection: Streamlit and FastAPI occasionally threw JSON parsing errors during live traffic testing.
-
-Solution: Enabled CORS middleware and structured standardized JSON payloads for seamless communication.
-
-🚀 Local Installation & Quickstart
-Follow these steps to run the project locally:
-
-1. Clone the Repository & Setup Environment
-Bash
-git clone [https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git](https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git)
-cd ai-fraud-return-sentinel
-python -m venv venv
+🛡️ Merchant Risk Sentinel: AI-Driven Return Risk & Fraud Prevention LayerRazorpay Hackathon Submission — Intercepting silent profit bleed by predicting high-risk and fraudulent returns before order fulfillment.📌 Project OverviewE-commerce merchants lose billions of dollars annually to profit margin bleed caused by serial returners, wardrobing, and reverse-logistics overhead. Traditional payment gateways only verify if a payment went through, but they fail to answer the critical question: "Is this customer going to return the item?"Merchant Risk Sentinel solves this by inserting an intelligent AI layer right between payment capture (via Razorpay webhooks) and warehouse dispatch. It scores incoming orders in milliseconds based on User Order History, allowing merchants to automatically hold suspicious shipments and protect their bottom lines.The workflow includes:Capturing payment data via Razorpay webhooksTracking user order and return historyScoring risk using a Random Forest machine learning modelManaging incoming transactions via a live Streamlit merchant command centerTriggering automated asynchronous alerts (WhatsApp/Make.com) for high-risk orders🚀 FeaturesPre-Fulfillment Risk Scoring: Evaluates e-commerce transactions in real time right after payment completion.User History Analysis: Analyzes past order counts, past return history, account age, and cart value.Live Merchant Command Center: Displays a real-time transaction feed with intuitive risk tiers (High, Medium, Low).Manual Review Action Buttons: Allows merchants to instantly click "Hold Shipment" or "Clear Order".Automated Background Workflows: Dispatches alerts via Make.com without introducing latency into the core API.Business ROI Analytics: Tracks financial metrics such as net margin protected and risk mitigation value directly on the dashboard.🛠 Technologies UsedTechnologyPurposePythonProgramming LanguageFastAPI & UvicornHigh-Performance Backend API & Background TasksStreamlitMerchant Dashboard & Command Center UIScikit-LearnRandom Forest Machine Learning ModelPandas & NumPyData Processing & Feature EngineeringJoblibModel Serialization & LoadingRequests & Make.comAutomated Webhook & WhatsApp Alerts📂 Project Structureai_fraud_detection/
+│
+├── models/
+│   └── risk_model.pkl
+├── src/
+│   ├── train_model.py
+│   ├── api.py
+│   └── dashboard.py
+├── requirements.txt
+└── README.md
+📊 Dataset & Model TrainingThe project relies on a custom-engineered training pipeline that models user behavior history, emphasizing past returns and order frequency to predict future return risks.Target Variable: is_fraudulent_return (binary classification)Features: past_orders_count, past_returns_count, account_age_days, cart_value_usdHandling Imbalance: Applied balanced class weights within the Random Forest classifier to accurately capture rare high-risk return patterns.⚙ InstallationClone the repositoryBashgit clone https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git
+Move into the project folderBashcd ai-fraud-return-sentinel
+Create and activate a virtual environmentBashpython -m venv venv
 # On Windows:
 venv\Scripts\activate
 # On Linux/Mac:
 source venv/bin/activate
-2. Install Dependencies
-Bash
-pip install -r requirements.txt
-3. Train the Machine Learning Model
-Generate the synthetic historical dataset and compile the model artifact:
-
-Bash
-python src/train_model.py
-4. Run the FastAPI Backend (Terminal 1)
-Bash
-uvicorn src.api:app --reload --port 8000
-5. Run the Streamlit Dashboard (Terminal 2)
-Bash
-streamlit run src/dashboard.py
-☁️ Cloud Deployment
-Backend API: Deployed as a web service on Render using standard production start commands.
-
-Frontend Dashboard: Deployed live on Streamlit Community Cloud, connected directly to the production API URL.
-
-🏆 Hackathon Impact
-By moving risk detection from post-return loss processing to pre-fulfillment interception, Merchant Risk Sentinel gives merchants absolute control over their fulfillment pipelines, securing profit margins that traditional payment infrastructure misses entirely.
+Install dependenciesBashpip install -r requirements.txt
+▶ Running the Project1. Train the Machine Learning ModelGenerate the historical training dataset and compile the model artifact:Bashpython src/train_model.py
+2. Run the FastAPI Backend (Terminal 1)Start the API server to handle real-time scoring and background automation:Bashuvicorn src.api:app --reload --port 8000
+3. Run the Streamlit Dashboard (Terminal 2)Launch the live merchant command center:Bashstreamlit run src/dashboard.py
+🧠 Model ArchitectureThe prediction model leverages an optimized ensemble learning approach:Random Forest ClassifierBalanced Class Weighting (to address severe class skew)Real-time Inference via FastAPI endpointsArchitecture Flow:[Razorpay / Webhook] ➔ [FastAPI Backend] ➔ [Random Forest AI Model] 
+                                                   │
+                   ┌───────────────────────────────┴───────────────────────────────┐
+                   ▼                                                               ▼
+[Streamlit Merchant Dashboard (Live Feed & ROI)]                 [Background Tasks ➔ Make.com / WhatsApp]
+⚠️ Build Challenges & Technical Obstacles OvercomedLinux Server Build Failures: Cloud deployments initially crashed due to incompatible local audio libraries (PyAudio) and Windows-specific packages (pywin32).Solution: Cleaned up requirements.txt by removing local audio dependencies and integrated platform-specific environment markers (sys_platform == 'win32').Severe Data Class Imbalance: Fraudulent returns naturally account for only ~2% of baseline data, causing standard models to overlook threats.Solution: Engineered custom synthetic training datasets reflecting user behavior history and applied balanced class weights to the Random Forest model.Frontend-Backend Disconnection: Streamlit and FastAPI occasionally threw JSON parsing errors during live traffic testing.Solution: Enabled CORS middleware and structured standardized JSON payloads for seamless communication.☁️ Cloud DeploymentBackend API: Deployed as a web service on Render using standard production start commands.Frontend Dashboard: Deployed live on Streamlit Community Cloud, connected directly to the production API URL.🏆 Hackathon ImpactBy moving risk detection from post-return loss processing to pre-fulfillment interception, Merchant Risk Sentinel gives merchants absolute control over their fulfillment pipelines, securing profit margins that traditional payment infrastructure misses entirely.👨‍💻 AuthorKaushik Rameshrao GunjkarArtificial Intelligence & Data Science Engineering Student📜 LicenseThis project is intended for educational, research, and hackathon demonstration purposes
