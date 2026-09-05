@@ -88,26 +88,39 @@ python -m venv venv
 ```
 ---
 On Windows:
-`venv\Scripts\activate`
-
+```
+venv\Scripts\activate
+```
+---
 On Linux/Mac:
-`source venv/bin/activate`
-
+```
+source venv/bin/activate
+```
+---
 Install dependencies:
-`pip install -r requirements.txt`
-
+```
+pip install -r requirements.txt
+```
+---
 ▶ Running the Project
 1. Train the Machine Learning Model
 Generate the historical training dataset and compile the model artifact:
-`python src/train_model.py`
-
-2. Run the FastAPI Backend (Terminal 1)
+```
+python src/train_model.py
+```
+---
+3. Run the FastAPI Backend (Terminal 1)
 Start the API server to handle real-time scoring and background automation:
-`uvicorn src.api:app --reload --port 8000`
-
-3. Run the Streamlit Dashboard (Terminal 2)
+```
+uvicorn src.api:app --reload --port 8000
+```
+---
+5. Run the Streamlit Dashboard (Terminal 2)
 Launch the live merchant command center:
-`streamlit run src/dashboard.py`
+```
+streamlit run src/dashboard.py
+```
+---
 
 🧠 Model Architecture
 The prediction model leverages an optimized ensemble learning approach:
