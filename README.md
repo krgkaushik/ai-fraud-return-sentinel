@@ -46,7 +46,8 @@ The workflow includes:
 
 ## 📂 Project Structure
 
-``1text
+```
+1text
 ai_fraud_detection/
 │
 ├── models/
@@ -56,7 +57,10 @@ ai_fraud_detection/
 │   ├── api.py
 │   └── dashboard.py
 ├── requirements.txt
-└── README.md``
+└── README.md
+```
+
+---
 
 📊 Dataset & Model Training
 The project relies on a custom-engineered training pipeline that models user behavior history, emphasizing past returns and order frequency to predict future return risks.
@@ -69,14 +73,20 @@ Handling Imbalance: Applied balanced class weights within the Random Forest clas
 
 ⚙ Installation
 Clone the repository:
-`git clone [https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git](https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git)`
-
+```
+git clone [https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git](https://github.com/YOUR_USERNAME/ai-fraud-return-sentinel.git)`
+```
+---
 Move into the project folder:
-`cd ai-fraud-return-sentinel`
-
+```
+cd ai-fraud-return-sentinel
+```
+---
 Create and activate a virtual environment:
-`python -m venv venv`
-
+```
+python -m venv venv
+```
+---
 On Windows:
 `venv\Scripts\activate`
 
