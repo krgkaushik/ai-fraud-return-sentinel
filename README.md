@@ -119,12 +119,13 @@ Balanced Class Weighting (to address severe class skew)
 Real-time Inference via FastAPI endpoints
 
 Architecture Flow:
-`
+```
 [Razorpay Webhook] ➔ [FastAPI] ➔ [Random Forest AI] 
                                        │
                 ┌──────────────────────┴──────────────────────┐
                 ▼                                             ▼
-[Streamlit Merchant Dashboard]             [Background Tasks ➔ WhatsApp/Make.com]`
+[Streamlit Merchant Dashboard]             [Background Tasks ➔ WhatsApp/Make.com]
+```
 
 ⚠️ Build Challenges & Technical Obstacles Overcome
 Linux Server Build Failures: Cloud deployments initially crashed due to incompatible local audio libraries (PyAudio) and Windows-specific packages (pywin32).
